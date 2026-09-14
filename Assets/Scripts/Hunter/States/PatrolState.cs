@@ -1,15 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.Collections.Generic;
 
 public class PatrolState : State
 {
-    private FSMAgent _agent;
+    private FSMHunter _agent;
     private PatrolData _data;
     private int currentWaypointIndex;
     private int direction = 1;
     private bool _isLoop;
-    public PatrolState(FSMAgent agent, PatrolData data,StateMachine stateMachine):base(stateMachine)
+
+    public PatrolState(FSMHunter agent, PatrolData data,StateMachine stateMachine):base(stateMachine)
     {
         this._agent = agent;
         this._data = data;
@@ -17,19 +19,19 @@ public class PatrolState : State
 
     public override void Enter()
     {
-        Debug.Log("Entering Patrol State");
+        _agent.setBaitMode(true);
     }
     public override void Exit()
     {
-        Debug.Log("Exiting Patrol State");
+        _agent.setBaitMode(false);
     }
     public override void Update()
     {
-        //if (_isLoop)
+        if (_isLoop)
             PatrolLoop();
-        //else
-        //    PatrolPingPong();
-        Debug.Log("Updating Patrol State");
+        else
+            PatrolPingPong();
+
     }
 
     private void PatrolLoop()
@@ -42,10 +44,33 @@ public class PatrolState : State
         }
         //pasar a seek
         var dir = nextWaypoint.position - _data.transform.position;
-        _data.transform.position += dir.normalized * _agent.speed * Time.deltaTime;
+        _data.transform.position += dir.normalized * _agent.maxSpeed * Time.deltaTime;
+        //Seek(nextWaypoint.position);
 
     }
+    /* revisaar no anda
+    private Vector3 CalculateSteering(Vector3 desired)
+    {
+        Vector3 steering = desired - _agent.Velocity;
 
+        steering = Vector3.ClampMagnitude(steering, _agent._maxSteering * Time.deltaTime);
+
+        return steering;
+    }
+
+    private Vector3 DesiredVector(Vector3 target)
+    {
+        Vector3 desired = (target - _data.transform.position).normalized;
+        desired *= _agent.maxSpeed;
+
+        return desired;
+    }
+
+    private Vector3 Seek(Vector3 target)
+    {
+        return CalculateSteering(DesiredVector(target));
+    }
+    */
     private void PatrolPingPong()
     {
         var nextWaypoint = _data.waypoints[currentWaypointIndex];
@@ -66,7 +91,11 @@ public class PatrolState : State
         }
         //pasar a seek
         var dir = nextWaypoint.position - _data.transform.position;
-        _data.transform.position += dir.normalized * _agent.speed * Time.deltaTime;
+        _data.transform.position += dir.normalized * _agent.maxSpeed * Time.deltaTime;
+    }
+    public void SetPatrolLoopMode(bool isLoop)
+    {
+        _isLoop = isLoop;
     }
 
 }

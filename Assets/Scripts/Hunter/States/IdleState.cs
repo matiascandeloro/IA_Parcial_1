@@ -9,11 +9,9 @@ public class IdleState : State
     public override void Enter() 
     {
         _timer = 0f;
-        Debug.Log("Entering Idle State");
     }
     public override void Exit() 
     {
-        Debug.Log("Exiting Idle State");
     }
     public override void Update() 
     { 
@@ -21,9 +19,7 @@ public class IdleState : State
         _timer += Time.deltaTime;
 
         if (_timer > _timeToChangePatrol) {
-            Debug.Log("Me muevo");
-            _stateMachine.ChangeState(PoliceStates.Patrol);
+            _stateMachine.ChangeState(HunterStates.Patrol);
         }
-        Debug.Log("Updating Idle State"); 
     }
 }

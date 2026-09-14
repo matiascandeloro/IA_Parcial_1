@@ -9,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1542810535972251348}
+  - component: {fileID: 2193446064289923624}
+  - component: {fileID: 2838831828666038000}
   - component: {fileID: 7098794397657345275}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cazador
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,6 +35,54 @@ Transform:
   - {fileID: 7653845769117438297}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &2193446064289923624
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333915872416497133}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &2838831828666038000
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333915872416497133}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7098794397657345275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,6 +95,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d4f77f2e89e7547a1c2ae86f349621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FSMHunter
+  maxSpeed: 3
+  _maxSteering: 3
+  _timeBetweenAttacks: 1
+  _rangeAttackRadius: 2
+  _meleeAttackRadius: 1
+  patrolData:
+    waypoints: []
+    transform: {fileID: 0}
+    waypointCheckDistance: 0
 --- !u!1 &6461912188532776454
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +116,7 @@ GameObject:
   - component: {fileID: 7698431764714787540}
   - component: {fileID: 3633090542979501652}
   - component: {fileID: 5406289548719893045}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +133,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1542810535972251348}
@@ -112,7 +171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c0b74008d3b53f641abace3e1bc22d60, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
